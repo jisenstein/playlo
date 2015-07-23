@@ -9,6 +9,12 @@ gem 'turbolinks'
 gem 'jbuilder'
 gem 'sdoc'
 
+# Twitter Sign in
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'twitter'
+gem 'twitter-text'
+
 group :development, :test do
   gem 'sqlite3'
   gem 'byebug'
