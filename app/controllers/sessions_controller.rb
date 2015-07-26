@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
   def create
-    debugger
     credentials = request.env['omniauth.auth']['credentials']
     session[:access_token] = credentials['token']
     session[:access_token_secret] = credentials['secret']
@@ -9,7 +8,16 @@ class SessionsController < ApplicationController
 
   def show
     if session['access_token'] && session['access_token_secret']
-      @user = client.user(include_entities: true)
+      debugger
+      #debugger
+      # @user = client.user(include_entities: true)
+      if !@friends
+        friends = JSON.parse(client.friends.to_json)
+        @friends = []
+        friends.each do |friend|
+          @friends << [friend["name"], friend["screen_name"]]
+        end
+      end
     else
       redirect_to failure_path
     end

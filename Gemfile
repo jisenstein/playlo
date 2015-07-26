@@ -9,11 +9,19 @@ gem 'turbolinks'
 gem 'jbuilder'
 gem 'sdoc'
 
-# Twitter Sign in
+# Twitter
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'twitter'
 gem 'twitter-text'
+
+# environment variables
+gem 'figaro'
+
+# Spotify
+gem 'rspotify'
+
+
 
 group :development, :test do
   gem 'sqlite3'
