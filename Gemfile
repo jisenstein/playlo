@@ -22,7 +22,6 @@ gem 'figaro'
 gem 'rspotify'
 
 
-
 group :development, :test do
   gem 'sqlite3'
   gem 'byebug'

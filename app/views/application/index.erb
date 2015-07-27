@@ -1,0 +1,32 @@
+<% if session['twitter_signed_in'] %>
+  Signed in to Twitter!
+<% else %>
+  <form action='/auth/twitter' method='get'>
+    <button type='submit'>Sign in to Twitter</button>
+  </form>
+<% end %>
+
+<br>
+
+<% if session['spotify_signed_in'] %>
+  Signed in to Spotify!
+<% else %>
+  <form action='/auth/spotify' method='get'>
+    <button type='submit'>Sign in to Spotify</button>
+  </form>
+<% end %>
+
+<br>
+
+<% if session['twitter_signed_in'] && session['spotify_signed_in'] && !session['playlist_created'] %>
+  <form action='/create_playlist' method='get'>
+    <button type='submit'>Create Playlist</button>
+  </form>
+  <br>
+<% elsif session['playlist_created'] %>
+    Playlist created!
+<% end %>
+
+<form action='/signout' method='get'>
+  <button type='submit'>Sign out</button>
+</form>

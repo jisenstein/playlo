@@ -1,34 +1,15 @@
-class SessionsController < ApplicationController
-  def create
+class SessionsController < ActionController::Base
+  def twitter
     credentials = request.env['omniauth.auth']['credentials']
     session[:access_token] = credentials['token']
     session[:access_token_secret] = credentials['secret']
-    redirect_to show_path, notice: 'Signed in'
+    session[:twitter_signed_in] = true
+    redirect_to root_path
   end
 
-  def show
-    if session['access_token'] && session['access_token_secret']
-      debugger
-      slug = client.user.screen_name
-      session[:slug] = slug
-      if (user = User.find_by_slug(slug))
-        @friends = user.twitter_friends
-      else
-        user = User.create_new(slug, @client)
-        @friends = user.twitter_friends
-      end
-    else
-      redirect_to failure_path
-    end
-  end
-
-  def test
-    debugger
-    render text: 'josh test'
-  end
-
-  def error
-    flash[:error] = 'Sign in with Twitter failed'
+  def spotify
+    session[:spotify_credentials] = request.env['omniauth.auth']
+    session[:spotify_signed_in] = true
     redirect_to root_path
   end
 
