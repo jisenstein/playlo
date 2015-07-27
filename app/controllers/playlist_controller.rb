@@ -29,6 +29,4 @@ class PlaylistController < ActionController::Base
       config.access_token_secret = session['access_token_secret']
     end
   end
-
-
 end

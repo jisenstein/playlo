@@ -1,0 +1,4 @@
+Form for playlist creation
+ - playlist title
+ - songs per artist
+ - top song, random song, random song from random album?
