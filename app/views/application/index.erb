@@ -27,6 +27,8 @@
     Playlist created!
 <% end %>
 
-<form action='/signout' method='get'>
-  <button type='submit'>Sign out</button>
-</form>
+<% if session['twitter_signed_in'] || session['spotify_signed_in'] %>
+  <form action='/signout' method='get'>
+    <button type='submit'>Sign out</button>
+  </form>
+<% end %>
