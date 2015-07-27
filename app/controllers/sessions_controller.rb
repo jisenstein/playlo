@@ -9,18 +9,22 @@ class SessionsController < ApplicationController
   def show
     if session['access_token'] && session['access_token_secret']
       debugger
-      #debugger
-      # @user = client.user(include_entities: true)
-      if !@friends
-        friends = JSON.parse(client.friends.to_json)
-        @friends = []
-        friends.each do |friend|
-          @friends << [friend["name"], friend["screen_name"]]
-        end
+      slug = client.user.screen_name
+      session[:slug] = slug
+      if (user = User.find_by_slug(slug))
+        @friends = user.twitter_friends
+      else
+        user = User.create_new(slug, @client)
+        @friends = user.twitter_friends
       end
     else
       redirect_to failure_path
     end
+  end
+
+  def test
+    debugger
+    render text: 'josh test'
   end
 
   def error

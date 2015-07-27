@@ -1,6 +1,6 @@
-<% @friends.each do |name, screen_name| %>
-  <%= name %>
+<% @friends.each do |friend| %>
+  <%= friend.name %>
   <br>
-  <%= screen_name %>
+  <%= friend.handle %>
   <br>
 <% end %>

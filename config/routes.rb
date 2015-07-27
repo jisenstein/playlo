@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   get '/profile', to: 'sessions#show', as: 'show'
   delete '/signout', to: 'sessions#destroy', as: 'signout'
 
+  get '/auth/spotify/callback', to: 'spotify#index'
+
+  get '/create_playlist', to: 'spotify#create_playlist'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
