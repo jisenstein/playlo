@@ -24,7 +24,9 @@
   </form>
   <br>
 <% elsif session['playlist_created'] %>
-    Playlist created!
+  Playlist created!
+<% elsif session['no_tracks'] %>
+  Error creating playlist: no artists found
 <% end %>
 
 <% if session['twitter_signed_in'] || session['spotify_signed_in'] %>
