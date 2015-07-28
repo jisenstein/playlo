@@ -7,7 +7,10 @@ class PlaylistController < ActionController::Base
       if friend["verified"] && friend["name"] != ""
         artists = RSpotify::Artist.search(friend["name"], limit: 5)
         if artists.present? && artists[0].popularity > 20
-          spotify_tracks << artists[0].top_tracks(:US)[0]
+          top_tracks = artists[0].top_tracks(:US)
+          if top_tracks.present?
+            spotify_tracks << top_tracks[0]
+          end
         end
       end
     end

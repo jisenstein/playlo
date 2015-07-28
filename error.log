@@ -1,0 +1,101 @@
+2015-07-27T23:48:59.166486+00:00 heroku[router]: at=info method=GET path="/" host=playlo.herokuapp.com request_id=77f1abbe-4d15-4c98-9b6b-c26a96681753 fwd="67.180.197.225" dyno=web.1 connect=1ms service=22ms status=200 bytes=1641
+2015-07-27T23:48:59.152517+00:00 app[web.1]: Started GET "/" for 67.180.197.225 at 2015-07-27 23:48:59 +0000
+2015-07-27T23:48:59.156469+00:00 app[web.1]:   Rendered application/index.erb within layouts/application (0.1ms)
+2015-07-27T23:48:59.155341+00:00 app[web.1]: Processing by ApplicationController#index as HTML
+2015-07-27T23:48:59.159027+00:00 app[web.1]: Completed 200 OK in 4ms (Views: 2.8ms | ActiveRecord: 0.0ms)
+2015-07-27T23:49:01.086190+00:00 app[web.1]: Started GET "/auth/twitter" for 67.180.197.225 at 2015-07-27 23:49:01 +0000
+2015-07-27T23:49:01.088349+00:00 app[web.1]: I, [2015-07-27T23:49:01.088255 #3]  INFO -- omniauth: (twitter) Request phase initiated.
+2015-07-27T23:49:01.415027+00:00 heroku[router]: at=info method=GET path="/auth/twitter" host=playlo.herokuapp.com request_id=291eef73-7816-4d3f-82dd-fb55e7ec64e6 fwd="67.180.197.225" dyno=web.1 connect=0ms service=328ms status=302 bytes=1168
+2015-07-27T23:49:02.950414+00:00 app[web.1]: Started GET "/auth/twitter/callback?oauth_token=qYLbHgAAAAAAgu8RAAABTtHrYsM&oauth_verifier=q9V66oxrVsEUOhMSqK4RkeCSrgUIWOdD" for 67.180.197.225 at 2015-07-27 23:49:02 +0000
+2015-07-27T23:49:02.960765+00:00 app[web.1]: I, [2015-07-27T23:49:02.960567 #3]  INFO -- omniauth: (twitter) Callback phase initiated.
+2015-07-27T23:49:04.088334+00:00 heroku[router]: at=info method=GET path="/auth/twitter/callback?oauth_token=qYLbHgAAAAAAgu8RAAABTtHrYsM&oauth_verifier=q9V66oxrVsEUOhMSqK4RkeCSrgUIWOdD" host=playlo.herokuapp.com request_id=ecdb7f9c-f438-44fb-9492-b89852adc5cf fwd="67.180.197.225" dyno=web.1 connect=2ms service=1161ms status=302 bytes=1261
+2015-07-27T23:49:04.084885+00:00 app[web.1]: Processing by SessionsController#twitter as HTML
+2015-07-27T23:49:04.084890+00:00 app[web.1]:   Parameters: {"oauth_token"=>"qYLbHgAAAAAAgu8RAAABTtHrYsM", "oauth_verifier"=>"q9V66oxrVsEUOhMSqK4RkeCSrgUIWOdD"}
+2015-07-27T23:49:04.085515+00:00 app[web.1]: Redirected to http://playlo.herokuapp.com/
+2015-07-27T23:49:04.263610+00:00 app[web.1]: Started GET "/" for 67.180.197.225 at 2015-07-27 23:49:04 +0000
+2015-07-27T23:49:04.279078+00:00 app[web.1]:   Rendered application/index.erb within layouts/application (0.1ms)
+2015-07-27T23:49:04.085741+00:00 app[web.1]: Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+2015-07-27T23:49:04.277875+00:00 app[web.1]: Processing by ApplicationController#index as HTML
+2015-07-27T23:49:04.279793+00:00 app[web.1]: Completed 200 OK in 2ms (Views: 1.0ms | ActiveRecord: 0.0ms)
+2015-07-27T23:49:04.284811+00:00 heroku[router]: at=info method=GET path="/" host=playlo.herokuapp.com request_id=793fe0ce-97bd-4124-9f75-a0a210a14041 fwd="67.180.197.225" dyno=web.1 connect=1ms service=37ms status=200 bytes=2018
+2015-07-27T23:49:05.767223+00:00 heroku[router]: at=info method=GET path="/auth/spotify" host=playlo.herokuapp.com request_id=7569f9d5-020d-447d-a7a9-1147c73ff0b5 fwd="67.180.197.225" dyno=web.1 connect=1ms service=41ms status=302 bytes=1780
+2015-07-27T23:49:05.744556+00:00 app[web.1]: Started GET "/auth/spotify" for 67.180.197.225 at 2015-07-27 23:49:05 +0000
+2015-07-27T23:49:05.753419+00:00 app[web.1]: I, [2015-07-27T23:49:05.753288 #3]  INFO -- omniauth: (spotify) Request phase initiated.
+2015-07-27T23:49:06.286825+00:00 app[web.1]: Started GET "/auth/spotify/callback?code=AQDxwTkgyoALgLwn5EmQNoFYAV-dkFPoi0nzZb2UPKWnCZakqdlXHgfiVu-M021ualLILUWs5thwD5GGtqUP1ZItyWsYzSuPtl7dXROucV_ZKoIjz-pd2m81w0sh-4v9SSTPpW8zZkcqgo1aX25kzsh6-pWnD6RdaZITRYaEhgK4Jq3hKbvvSUY78Q3SmzFn2tOExGTxAlNa5dfWOBXOGCbpwkhPx-Gc1zisgL-9_W6tU0B1yXBIVd_6djMHU182&state=97847d25da5b63c1a43bf3d75827ffbd4d5c4173f67cbd15" for 67.180.197.225 at 2015-07-27 23:49:06 +0000
+2015-07-27T23:49:06.291372+00:00 app[web.1]: I, [2015-07-27T23:49:06.290049 #3]  INFO -- omniauth: (spotify) Callback phase initiated.
+2015-07-27T23:49:06.972753+00:00 app[web.1]: Processing by SessionsController#spotify as HTML
+2015-07-27T23:49:06.972758+00:00 app[web.1]:   Parameters: {"code"=>"AQDxwTkgyoALgLwn5EmQNoFYAV-dkFPoi0nzZb2UPKWnCZakqdlXHgfiVu-M021ualLILUWs5thwD5GGtqUP1ZItyWsYzSuPtl7dXROucV_ZKoIjz-pd2m81w0sh-4v9SSTPpW8zZkcqgo1aX25kzsh6-pWnD6RdaZITRYaEhgK4Jq3hKbvvSUY78Q3SmzFn2tOExGTxAlNa5dfWOBXOGCbpwkhPx-Gc1zisgL-9_W6tU0B1yXBIVd_6djMHU182", "state"=>"97847d25da5b63c1a43bf3d75827ffbd4d5c4173f67cbd15"}
+2015-07-27T23:49:06.973698+00:00 app[web.1]: Redirected to http://playlo.herokuapp.com/
+2015-07-27T23:49:06.973701+00:00 app[web.1]: Completed 302 Found in 0ms (ActiveRecord: 0.0ms)
+2015-07-27T23:49:07.126560+00:00 app[web.1]: Started GET "/" for 67.180.197.225 at 2015-07-27 23:49:07 +0000
+2015-07-27T23:49:07.131981+00:00 app[web.1]:   Rendered application/index.erb within layouts/application (0.1ms)
+2015-07-27T23:49:06.978099+00:00 heroku[router]: at=info method=GET path="/auth/spotify/callback?code=AQDxwTkgyoALgLwn5EmQNoFYAV-dkFPoi0nzZb2UPKWnCZakqdlXHgfiVu-M021ualLILUWs5thwD5GGtqUP1ZItyWsYzSuPtl7dXROucV_ZKoIjz-pd2m81w0sh-4v9SSTPpW8zZkcqgo1aX25kzsh6-pWnD6RdaZITRYaEhgK4Jq3hKbvvSUY78Q3SmzFn2tOExGTxAlNa5dfWOBXOGCbpwkhPx-Gc1zisgL-9_W6tU0B1yXBIVd_6djMHU182&state=97847d25da5b63c1a43bf3d75827ffbd4d5c4173f67cbd15" host=playlo.herokuapp.com request_id=e50324e3-fb08-493a-830f-71b55bd099ff fwd="67.180.197.225" dyno=web.1 connect=1ms service=699ms status=302 bytes=3279
+2015-07-27T23:49:07.157123+00:00 heroku[router]: at=info method=GET path="/" host=playlo.herokuapp.com request_id=4aec62d5-1a56-417c-b0e0-9e0ccea84122 fwd="67.180.197.225" dyno=web.1 connect=0ms service=41ms status=200 bytes=4067
+2015-07-27T23:49:07.130847+00:00 app[web.1]: Processing by ApplicationController#index as HTML
+2015-07-27T23:49:07.132593+00:00 app[web.1]: Completed 200 OK in 2ms (Views: 0.9ms | ActiveRecord: 0.0ms)
+2015-07-27T23:49:08.787196+00:00 app[web.1]: Started GET "/create_playlist" for 67.180.197.225 at 2015-07-27 23:49:08 +0000
+2015-07-27T23:49:08.790977+00:00 app[web.1]: Processing by PlaylistController#create as HTML
+2015-07-27T23:49:23.971342+00:00 heroku[router]: at=info method=GET path="/create_playlist" host=playlo.herokuapp.com request_id=16693e1d-f4dc-4276-8054-ce22f9dc7d04 fwd="67.180.197.225" dyno=web.1 connect=1ms service=15182ms status=302 bytes=3342
+2015-07-27T23:49:24.094891+00:00 heroku[router]: at=info method=GET path="/" host=playlo.herokuapp.com request_id=a9fd10e0-d83b-4d27-ad76-bae7297c433d fwd="67.180.197.225" dyno=web.1 connect=1ms service=22ms status=200 bytes=4035
+2015-07-27T23:49:23.961592+00:00 app[web.1]: Completed 302 Found in 15170ms (ActiveRecord: 0.0ms)
+2015-07-27T23:49:24.079266+00:00 app[web.1]: Processing by ApplicationController#index as HTML
+2015-07-27T23:49:23.961141+00:00 app[web.1]: Redirected to http://playlo.herokuapp.com/
+2015-07-27T23:49:24.089023+00:00 app[web.1]: Completed 200 OK in 4ms (Views: 2.7ms | ActiveRecord: 0.0ms)
+2015-07-27T23:49:24.075001+00:00 app[web.1]: Started GET "/" for 67.180.197.225 at 2015-07-27 23:49:24 +0000
+2015-07-27T23:49:24.087877+00:00 app[web.1]:   Rendered application/index.erb within layouts/application (0.4ms)
+2015-07-27T23:51:11.627654+00:00 heroku[router]: at=info method=GET path="/signout" host=playlo.herokuapp.com request_id=e7a8d245-a6a3-4015-b910-be6bf384e5a5 fwd="67.180.197.225" dyno=web.1 connect=2ms service=12ms status=302 bytes=781
+2015-07-27T23:51:11.619618+00:00 app[web.1]: Started GET "/signout" for 67.180.197.225 at 2015-07-27 23:51:11 +0000
+2015-07-27T23:51:11.624701+00:00 app[web.1]: Redirected to http://playlo.herokuapp.com/
+2015-07-27T23:51:11.727029+00:00 app[web.1]: Started GET "/" for 67.180.197.225 at 2015-07-27 23:51:11 +0000
+2015-07-27T23:51:11.730975+00:00 app[web.1]:   Rendered application/index.erb within layouts/application (0.1ms)
+2015-07-27T23:51:11.729904+00:00 app[web.1]: Processing by ApplicationController#index as HTML
+2015-07-27T23:51:11.626070+00:00 app[web.1]: Completed 302 Found in 2ms (ActiveRecord: 0.0ms)
+2015-07-27T23:51:11.623355+00:00 app[web.1]: Processing by SessionsController#destroy as HTML
+2015-07-27T23:51:11.731774+00:00 app[web.1]: Completed 200 OK in 2ms (Views: 1.1ms | ActiveRecord: 0.0ms)
+2015-07-27T23:51:11.731460+00:00 heroku[router]: at=info method=GET path="/" host=playlo.herokuapp.com request_id=1302bf67-c4f9-4988-bb90-22191c96a73c fwd="67.180.197.225" dyno=web.1 connect=1ms service=7ms status=200 bytes=1641
+2015-07-27T23:51:12.626327+00:00 app[web.1]: I, [2015-07-27T23:51:12.626181 #3]  INFO -- omniauth: (twitter) Request phase initiated.
+2015-07-27T23:51:12.624118+00:00 app[web.1]: Started GET "/auth/twitter" for 67.180.197.225 at 2015-07-27 23:51:12 +0000
+2015-07-27T23:51:13.038815+00:00 heroku[router]: at=info method=GET path="/auth/twitter" host=playlo.herokuapp.com request_id=cfe40157-3822-45be-9343-569df01b0e0c fwd="67.180.197.225" dyno=web.1 connect=1ms service=418ms status=302 bytes=1168
+2015-07-27T23:51:14.095604+00:00 app[web.1]: Started GET "/auth/twitter/callback?oauth_token=IE2LXgAAAAAAgu8RAAABTtHtZQI&oauth_verifier=pTLiXxV0ZDqZFAcGBKTD49XhBLv5tbYM" for 67.180.197.225 at 2015-07-27 23:51:14 +0000
+2015-07-27T23:51:14.099409+00:00 app[web.1]: I, [2015-07-27T23:51:14.098396 #3]  INFO -- omniauth: (twitter) Callback phase initiated.
+2015-07-27T23:51:15.213531+00:00 heroku[router]: at=info method=GET path="/auth/twitter/callback?oauth_token=IE2LXgAAAAAAgu8RAAABTtHtZQI&oauth_verifier=pTLiXxV0ZDqZFAcGBKTD49XhBLv5tbYM" host=playlo.herokuapp.com request_id=3852fcae-1d3c-43b3-ad45-a3628ca63bf6 fwd="67.180.197.225" dyno=web.1 connect=0ms service=1126ms status=302 bytes=1261
+2015-07-27T23:51:15.211069+00:00 app[web.1]: Processing by SessionsController#twitter as HTML
+2015-07-27T23:51:15.211079+00:00 app[web.1]:   Parameters: {"oauth_token"=>"IE2LXgAAAAAAgu8RAAABTtHtZQI", "oauth_verifier"=>"pTLiXxV0ZDqZFAcGBKTD49XhBLv5tbYM"}
+2015-07-27T23:51:15.211496+00:00 app[web.1]: Redirected to http://playlo.herokuapp.com/
+2015-07-27T23:51:15.211706+00:00 app[web.1]: Completed 302 Found in 0ms (ActiveRecord: 0.0ms)
+2015-07-27T23:51:15.349863+00:00 app[web.1]: Started GET "/" for 67.180.197.225 at 2015-07-27 23:51:15 +0000
+2015-07-27T23:51:15.371028+00:00 app[web.1]:   Rendered application/index.erb within layouts/application (0.1ms)
+2015-07-27T23:51:15.379919+00:00 heroku[router]: at=info method=GET path="/" host=playlo.herokuapp.com request_id=d223783e-eb06-4121-b06a-1fb3c96d8c99 fwd="67.180.197.225" dyno=web.1 connect=1ms service=69ms status=200 bytes=2018
+2015-07-27T23:51:15.359344+00:00 app[web.1]: Processing by ApplicationController#index as HTML
+2015-07-27T23:51:15.379925+00:00 app[web.1]: Completed 200 OK in 10ms (Views: 9.2ms | ActiveRecord: 0.0ms)
+2015-07-27T23:51:16.983252+00:00 heroku[router]: at=info method=GET path="/auth/spotify" host=playlo.herokuapp.com request_id=e5537ac8-d517-498c-be74-abab3699da55 fwd="67.180.197.225" dyno=web.1 connect=3ms service=7ms status=302 bytes=1780
+2015-07-27T23:51:16.979364+00:00 app[web.1]: Started GET "/auth/spotify" for 67.180.197.225 at 2015-07-27 23:51:16 +0000
+2015-07-27T23:51:16.980889+00:00 app[web.1]: I, [2015-07-27T23:51:16.980793 #3]  INFO -- omniauth: (spotify) Request phase initiated.
+2015-07-27T23:51:17.404604+00:00 app[web.1]: Started GET "/auth/spotify/callback?code=AQDXZynlbAD3k8elcVW86tF-ztW9YZthhT3xeGFFDox1zeThKKgySXa6EgocGGptL210mdkOMNI6mhKxpBqp7dJG6drAe8US7eKYXpFQRJCOriGD1gLVbB1tqSdza_XHcHQj9UVcS-Dl7YidvbFU3H40vrlUeZeacSl4arVnq7uqsZMgVVGsgHbLm3x_qZBcs-sFnZCeEU6VtSTmdcICF5HyvBz8qZtGseMAOaF4SY--E4zWUAbZyOdu6UAg00t2&state=500257948503dbcc9d42cff232187f812cb5ef7699d9f3a1" for 67.180.197.225 at 2015-07-27 23:51:17 +0000
+2015-07-27T23:51:17.406677+00:00 app[web.1]: I, [2015-07-27T23:51:17.406601 #3]  INFO -- omniauth: (spotify) Callback phase initiated.
+2015-07-27T23:51:18.115748+00:00 heroku[router]: at=info method=GET path="/auth/spotify/callback?code=AQDXZynlbAD3k8elcVW86tF-ztW9YZthhT3xeGFFDox1zeThKKgySXa6EgocGGptL210mdkOMNI6mhKxpBqp7dJG6drAe8US7eKYXpFQRJCOriGD1gLVbB1tqSdza_XHcHQj9UVcS-Dl7YidvbFU3H40vrlUeZeacSl4arVnq7uqsZMgVVGsgHbLm3x_qZBcs-sFnZCeEU6VtSTmdcICF5HyvBz8qZtGseMAOaF4SY--E4zWUAbZyOdu6UAg00t2&state=500257948503dbcc9d42cff232187f812cb5ef7699d9f3a1" host=playlo.herokuapp.com request_id=d243982a-a3f3-4830-afe9-ec4b87bc36d6 fwd="67.180.197.225" dyno=web.1 connect=2ms service=715ms status=302 bytes=3279
+2015-07-27T23:51:18.095151+00:00 app[web.1]:   Parameters: {"code"=>"AQDXZynlbAD3k8elcVW86tF-ztW9YZthhT3xeGFFDox1zeThKKgySXa6EgocGGptL210mdkOMNI6mhKxpBqp7dJG6drAe8US7eKYXpFQRJCOriGD1gLVbB1tqSdza_XHcHQj9UVcS-Dl7YidvbFU3H40vrlUeZeacSl4arVnq7uqsZMgVVGsgHbLm3x_qZBcs-sFnZCeEU6VtSTmdcICF5HyvBz8qZtGseMAOaF4SY--E4zWUAbZyOdu6UAg00t2", "state"=>"500257948503dbcc9d42cff232187f812cb5ef7699d9f3a1"}
+2015-07-27T23:51:18.095137+00:00 app[web.1]: Processing by SessionsController#spotify as HTML
+2015-07-27T23:51:18.098094+00:00 app[web.1]: Redirected to http://playlo.herokuapp.com/
+2015-07-27T23:51:18.294829+00:00 app[web.1]: Started GET "/" for 67.180.197.225 at 2015-07-27 23:51:18 +0000
+2015-07-27T23:51:18.299450+00:00 app[web.1]:   Rendered application/index.erb within layouts/application (0.1ms)
+2015-07-27T23:51:18.098273+00:00 app[web.1]: Completed 302 Found in 3ms (ActiveRecord: 0.0ms)
+2015-07-27T23:51:18.297849+00:00 app[web.1]: Processing by ApplicationController#index as HTML
+2015-07-27T23:51:18.300107+00:00 app[web.1]: Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.0ms)
+2015-07-27T23:51:18.299681+00:00 heroku[router]: at=info method=GET path="/" host=playlo.herokuapp.com request_id=29d06da3-df10-4c8c-8b47-80a1e3bdae39 fwd="67.180.197.225" dyno=web.1 connect=1ms service=11ms status=200 bytes=4067
+2015-07-27T23:51:19.429141+00:00 heroku[router]: at=info method=GET path="/signout" host=playlo.herokuapp.com request_id=3b793c60-e760-49f7-8f64-60d05e9dd8b9 fwd="67.180.197.225" dyno=web.1 connect=0ms service=21ms status=302 bytes=781
+2015-07-27T23:51:19.420416+00:00 app[web.1]: Started GET "/signout" for 67.180.197.225 at 2015-07-27 23:51:19 +0000
+2015-07-27T23:51:19.424421+00:00 app[web.1]: Redirected to http://playlo.herokuapp.com/
+2015-07-27T23:51:19.424583+00:00 app[web.1]: Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+2015-07-27T23:51:19.526368+00:00 app[web.1]: Started GET "/" for 67.180.197.225 at 2015-07-27 23:51:19 +0000
+2015-07-27T23:51:19.532432+00:00 app[web.1]:   Rendered application/index.erb within layouts/application (0.1ms)
+2015-07-27T23:51:19.529439+00:00 app[web.1]: Processing by ApplicationController#index as HTML
+2015-07-27T23:51:19.423354+00:00 app[web.1]: Processing by SessionsController#destroy as HTML
+2015-07-27T23:51:19.533470+00:00 app[web.1]: Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.0ms)
+2015-07-27T23:51:19.535424+00:00 heroku[router]: at=info method=GET path="/" host=playlo.herokuapp.com request_id=f0fbdaee-65c9-4a6d-a190-baca629bcd6c fwd="67.180.197.225" dyno=web.1 connect=1ms service=12ms status=200 bytes=1641
+2015-07-28T00:24:19.818639+00:00 heroku[web.1]: Idling
+2015-07-28T00:24:19.819412+00:00 heroku[web.1]: State changed from up to down
+2015-07-28T00:24:23.536723+00:00 heroku[web.1]: Stopping all processes with SIGTERM
+2015-07-28T00:24:24.469614+00:00 app[web.1]: - Gracefully stopping, waiting for requests to finish
+2015-07-28T00:24:24.469709+00:00 app[web.1]: - Goodbye!
+2015-07-28T00:24:25.834730+00:00 heroku[web.1]: Process exited with status 0
