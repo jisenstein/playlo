@@ -6,12 +6,14 @@ class PlaylistController < ActionController::Base
     # friends = JSON.parse(twitter_client.friends.to_json)
 
     friends = Rails.cache.fetch(session['access_token'])
-    friends.each do |friend|
-      artists = RSpotify::Artist.search(friend, limit: 5)
-      if artists.present? && artists[0].popularity > 20
-        top_tracks = artists[0].top_tracks(:US)
-        if top_tracks.present?
-          spotify_tracks << top_tracks[0]
+    if !friends.blank?
+      friends.each do |friend|
+        artists = RSpotify::Artist.search(friend, limit: 5)
+        if artists.present? && artists[0].popularity > 20
+          top_tracks = artists[0].top_tracks(:US)
+          if top_tracks.present?
+            spotify_tracks << top_tracks[0]
+          end
         end
       end
     end
