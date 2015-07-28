@@ -1,7 +1,11 @@
 class PlaylistController < ActionController::Base
   def create
     spotify_tracks = []
+    puts "ready to create a playlist"
+
     friends = JSON.parse(twitter_client.friends.to_json)
+
+    puts "preapring to parse #{friends.count} friends"
 
     friends.each do |friend|
       if friend["verified"] && friend["name"] != ""
@@ -14,10 +18,14 @@ class PlaylistController < ActionController::Base
         end
       end
     end
+
+    puts "finished parsing frieinds"
+
     spotify_user = RSpotify::User.new(session['spotify_credentials'])
     playlist = spotify_user.create_playlist!('my-first-playlo-playlist')
     playlist.change_details!(public: false)
     playlist.add_tracks!(spotify_tracks)
+    puts "successfully created playlist"
     session[:playlist_created] = true
     redirect_to root_path
   end
