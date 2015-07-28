@@ -5,7 +5,7 @@ class SessionsController < ActionController::Base
     session[:access_token_secret] = credentials['secret']
     session[:twitter_signed_in] = true
 
-    @followings = Rails.cache.fetch(session['access_token']) do
+    @followings = Rails.cache.fetch(session['access_token'], :expires_in => 10.minutes) do
       puts "about to get client"
       twitter_client = client
       puts "just got client about to get friends"
