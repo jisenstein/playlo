@@ -40,6 +40,6 @@ class SessionsController < ApplicationController
       flash[:notice] = "Hit rate limit."
       raise
     end
-    Rails.cache.write(session['access_token'], verified_friend_names, expires_in: 10.minutes)
+    Rails.cache.write(session['access_token'], verified_friend_names, expires_in: 15.minutes)
   end
 end

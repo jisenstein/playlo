@@ -35,7 +35,7 @@
 
 </div>
 
-<% if true || (session['twitter_signed_in'] && session['spotify_signed_in']) %>
+<% if session['twitter_signed_in'] && session['spotify_signed_in'] %>
  <form role="form" action='/create_playlist' method='get'>
     <div class="form-group">
       <label for="name">Playlist name:</label>
