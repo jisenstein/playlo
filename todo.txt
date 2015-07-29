@@ -1,12 +1,6 @@
 Form for playlist creation
  - playlist title
  - songs per artist
- - top song, random song, random song from random album?
+ - top song, random top song, random song from random album?
 
-Add 404 page
-
-Layout/design
-
-Instagram
-
-Facebook
+Instagram/Facebook

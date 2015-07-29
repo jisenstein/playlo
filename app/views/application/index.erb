@@ -1,3 +1,8 @@
+<% if flash[:notice] %>
+  <%= flash[:notice] %>
+  <br>
+<% end %>
+
 <% if session['twitter_signed_in'] %>
   Signed in to Twitter!
 <% else %>

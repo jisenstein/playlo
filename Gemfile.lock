@@ -216,7 +216,6 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
-  coffee-rails
   figaro
   jbuilder
   jquery-rails

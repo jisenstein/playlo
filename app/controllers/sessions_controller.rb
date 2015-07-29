@@ -1,26 +1,15 @@
-class SessionsController < ActionController::Base
+class SessionsController < ApplicationController 
   def twitter
     credentials = request.env['omniauth.auth']['credentials']
     session[:access_token] = credentials['token']
     session[:access_token_secret] = credentials['secret']
-    session[:twitter_signed_in] = true
-
-    @followings = Rails.cache.fetch(session['access_token'], :expires_in => 10.minutes) do
-      puts "about to get client"
-      twitter_client = client
-      puts "just got client about to get friends"
-      friends_list = JSON.parse(twitter_client.friends.to_json)
-      puts "just got #{friends_list.count} friends let's do this"
-      res = []
-      friends_list.each do |friend|
-        if friend["verified"] && !friend["name"].empty?
-          res << friend["name"] 
-        end
-      end
-      puts "found #{res.count} verified friends"
-      res
+    begin
+      fetch_twitter_friends
+      session[:twitter_signed_in] = true
+      redirect_to root_path
+    rescue
+      redirect_to root_path
     end
-    redirect_to root_path
   end
 
   def spotify
@@ -35,14 +24,22 @@ class SessionsController < ActionController::Base
     reset_session
     redirect_to root_path, notice: 'Signed out'
   end
-  
-  def client
-    @client ||= Twitter::REST::Client.new do |config|
-      config.consumer_key = ENV['CONSUMER_KEY']
-      config.consumer_secret = ENV['CONSUMER_SECRET']
-      config.access_token = session['access_token']
-      config.access_token_secret = session['access_token_secret']
-    end
-  end
 
+  def fetch_twitter_friends
+    begin
+      client = twitter_client
+      verified_friend_names = []
+      friends = client.friends({ count: 200, skip_status: true, include_user_entities: false })
+      friends.each do |f|
+        if f.verified?
+          verified_friend_names << f.name
+        end
+      end
+    rescue Twitter::Error::TooManyRequests => error
+      puts "Hit rate limit, will reset in #{error.rate_limit.reset_in}."
+      flash[:notice] = "Hit rate limit."
+      raise
+    end
+    Rails.cache.write(session['access_token'], verified_friend_names, expires_in: 10.minutes)
+  end
 end

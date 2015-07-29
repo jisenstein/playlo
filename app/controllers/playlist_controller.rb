@@ -1,50 +1,37 @@
-class PlaylistController < ActionController::Base
+class PlaylistController < ApplicationController
   def create
     spotify_tracks = []
     puts "ready to create a playlist"
 
-    # friends = JSON.parse(twitter_client.friends.to_json)
-
     friends = Rails.cache.fetch(session['access_token'])
     if !friends.blank?
       friends.each do |friend|
-        artists = RSpotify::Artist.search(friend, limit: 5)
-        if artists.present? && artists[0].popularity > 20
-          top_tracks = artists[0].top_tracks(:US)
-          if top_tracks.present?
-            spotify_tracks << top_tracks[0]
+        artists = RSpotify::Artist.search(friend, limit: 1)
+        if (a = artists[0]) && a.popularity > 20
+          top_tracks = a.top_tracks(:US)
+          if (t = top_tracks[0]) && t.popularity > 20
+            puts "Twitter name: #{friend} --- Artist name: #{a.name}"
+            puts "Artist popularity: #{a.popularity} --- Track popularity: #{t.popularity}"
+            spotify_tracks << t
           end
         end
       end
     end
 
-    # friends.each do |friend|
-    #   if friend["verified"] && friend["name"] != ""
-    #     artists = RSpotify::Artist.search(friend["name"], limit: 5)
-    #     if artists.present? && artists[0].popularity > 20
-    #       top_tracks = artists[0].top_tracks(:US)
-    #       if top_tracks.present?
-    #         spotify_tracks << top_tracks[0]
-    #       end
-    #     end
-    #   end
-    # end
-
     puts "finished searching for tracks"
+    puts "about to log into spotify"
 
-    if spotify_tracks.blank?
-      session[:no_tracks] = true
-      redirect_to root_path
-    else
-      puts "about to log into spotify"
-      spotify_user = RSpotify::User.new(session['spotify_credentials'])
-      puts "logged into spotify"
-      playlist = spotify_user.create_playlist!('my-first-playlo-playlist')
-      playlist.change_details!(public: false)
-      playlist.add_tracks!(spotify_tracks)
-      puts "successfully created playlist"
-      session[:playlist_created] = true
-      redirect_to root_path
-    end
+    spotify_user = RSpotify::User.new(session['spotify_credentials'])
+
+    puts "logged into spotify"
+
+    playlist = spotify_user.create_playlist!('my-first-playlo-playlist')
+    playlist.change_details!(public: false)
+    playlist.add_tracks!(spotify_tracks)
+
+    puts "successfully created playlist"
+
+    session[:playlist_created] = true
+    redirect_to root_path
   end
 end
