@@ -1,41 +1,81 @@
 <% if flash[:notice] %>
-  <%= flash[:notice] %>
+  <h3><%= flash[:notice] %></h3>
   <br>
 <% end %>
 
+<div id='container'>
+    <div class='sign_in_bt'>
 <% if session['twitter_signed_in'] %>
-  Signed in to Twitter!
+  <h3>Signed in to Twitter!</h3>
 <% else %>
   <form action='/auth/twitter' method='get'>
-    <button type='submit'>Sign in to Twitter</button>
+    <input type='image' src=<%= image_path "twitter-sign-in" %>>
   </form>
 <% end %>
+    </div>
 
-<br>
-
+<div class='sign_in_bt'>
 <% if session['spotify_signed_in'] %>
-  Signed in to Spotify!
+  <h3>Signed in to Spotify!</h3>
 <% else %>
   <form action='/auth/spotify' method='get'>
-    <button type='submit'>Sign in to Spotify</button>
+    <input type='image' src=<%= image_path "log_in-desktop-small" %>>
   </form>
 <% end %>
 
-<br>
+</div>
 
-<% if session['twitter_signed_in'] && session['spotify_signed_in'] && !session['playlist_created'] %>
-  <form action='/create_playlist' method='get'>
-    <button type='submit'>Create Playlist</button>
-  </form>
-  <br>
-<% elsif session['playlist_created'] %>
-  Playlist created!
-<% elsif session['no_tracks'] %>
-  Error creating playlist: no artists found
-<% end %>
-
+<div class='sign_in_bt'>
 <% if session['twitter_signed_in'] || session['spotify_signed_in'] %>
   <form action='/signout' method='get'>
-    <button type='submit'>Sign out</button>
+    <button class='btn btn-primary' type='submit'>Sign out</button>
   </form>
 <% end %>
+</div>
+
+</div>
+
+<% if session['twitter_signed_in'] && session['spotify_signed_in'] %>
+ <form role="form" action='/create_playlist' method='get'>
+    <div class="form-group">
+      <label for="name">Playlist name:</label>
+      <input type="name" class="form-control" id="name" placeholder="Enter playlist name">
+    </div>
+    <div class="radio">
+      <label><input type="radio" name="random" value="top">Top tracks</label>
+    </div>
+    <div class="radio">
+      <label><input type="radio" name="random" value="random">Random top tracks</label>
+    </div>
+    <div class="radio">
+      <label><input type="radio" name="random" value="super_random">Random track from random album (might take a while)</label>
+    </div>
+    <input class='spotify_submit_bt' type='image' src=<%= image_path "create_playlist-green" %>>
+  </form>
+  <br>
+<% end %>
+
+
+<style>
+
+#container {
+  margin: auto;
+  width: 1000px;
+  padding-left: 154px;
+}
+
+form {
+  margin: auto;
+  padding-top: 50px;
+  width: 500px;
+}
+
+.sign_in_bt {
+  width: 33%;
+  display: inline-block;
+}
+.spotify_submit_bt {
+  padding-left: 160px;
+  padding-top: 5px;
+}
+</style>

@@ -12,4 +12,18 @@
  *
  *= require_tree .
  *= require_self
+ *= require bootstrap.min
  */
+
+body {
+  background-color: #b0c4de !important;
+}
+
+nav {
+  height: 70px;
+}
+
+nav p{
+  padding-top: 5px;
+  font-size: 40px;
+}
