@@ -1,0 +1,32 @@
+// .twitter_sign_in {
+//   background-image: url(image-path("twitter-sign-in"));
+// }
+// 
+// .spotify_sign_in {
+//   background-image: asset-data-url("log_in-desktop-small");
+// }
+// 
+// .create_playlist {
+//   background-image: asset-data-url("create_playlist-green");
+// }
+
+#container {
+  margin: auto;
+  width: 1000px;
+  padding-left: 154px;
+}
+
+form {
+  margin: auto;
+  padding-top: 50px;
+  width: 500px;
+}
+
+.sign_in_bt {
+  width: 33%;
+  display: inline-block;
+}
+.spotify_submit_bt {
+  padding-left: 160px;
+  padding-top: 5px;
+}

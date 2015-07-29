@@ -9,7 +9,7 @@
   <h3>Signed in to Twitter!</h3>
 <% else %>
   <form action='/auth/twitter' method='get'>
-    <input type='image' src=<%= asset_path "twitter-sign-in" %>>
+    <input type="submit" value="Sign into Twitter">
   </form>
 <% end %>
     </div>
@@ -19,7 +19,7 @@
   <h3>Signed in to Spotify!</h3>
 <% else %>
   <form action='/auth/spotify' method='get'>
-    <input type='image' src=<%= asset_path "log_in-desktop-small" %>>
+    <input type="submit" value="Sign into Spotify">
   </form>
 <% end %>
 
@@ -35,7 +35,7 @@
 
 </div>
 
-<% if true || (session['twitter_signed_in'] && session['spotify_signed_in']) %>
+<% if session['twitter_signed_in'] && session['spotify_signed_in'] %>
  <form role="form" action='/create_playlist' method='get'>
     <div class="form-group">
       <label for="name">Playlist name:</label>
@@ -50,32 +50,7 @@
     <div class="radio">
       <label><input type="radio" name="random" value="super_random">Random track from random album (might take a while)</label>
     </div>
-    <input class='spotify_submit_bt' type='image' src=<%= asset_path "create_playlist-green" %>>
+    <input type="submit" value="Create Playlist">
   </form>
   <br>
 <% end %>
-
-
-<style>
-
-#container {
-  margin: auto;
-  width: 1000px;
-  padding-left: 154px;
-}
-
-form {
-  margin: auto;
-  padding-top: 50px;
-  width: 500px;
-}
-
-.sign_in_bt {
-  width: 33%;
-  display: inline-block;
-}
-.spotify_submit_bt {
-  padding-left: 160px;
-  padding-top: 5px;
-}
-</style>
