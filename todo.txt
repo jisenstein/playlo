@@ -1,6 +1,9 @@
 Form for playlist creation
- - playlist title
  - songs per artist
- - top song, random top song, random song from random album?
+ - sentence style song curation
 
-Instagram/Facebook
+Miscellaneous
+ - make hash of bad accounts and filter out on twitter login
+ - factor out case statement in playlists controller
+ - make functions (model?) to get types of tracks
+ - add Instagram/Facebook sign in

@@ -6,20 +6,28 @@ class PlaylistController < ApplicationController
     playlist_name = params[:name] || "a playlist"
 
     friends = Rails.cache.fetch(session['access_token'])
-    if !friends.blank?
-      friends.each do |friend|
-        artists = RSpotify::Artist.search(friend, limit: 1)
-        if (a = artists[0]) && a.popularity > 20
-          spotify_tracks << case type
-                            when "top"
-                              a.top_tracks(:US).first
-                            when "random"
-                              a.top_tracks(:US).sample
-                            when "super_random"
-                              a.albums(limit: 7, country: 'US').sample.tracks.sample
-                            end
+    begin
+      end
+      if !friends.blank?
+        friends.each do |friend|
+          artists = RSpotify::Artist.search(friend, limit: 1)
+          if (a = artists[0]) && a.popularity > 20
+            spotify_tracks << case type
+            when "top"
+              a.top_tracks(:US).first
+            when "random"
+              a.top_tracks(:US).sample
+            when "super_random"
+              a.albums(limit: 7, country: 'US').sample.tracks.sample
+            end
+          end
         end
       end
+    rescue RestClient::TooManyRequests => error
+      puts "GOT A SPOTIFY RATE LIMIT"
+      puts error
+      flash[:notice] = "Hit spotify rate limit."
+      redirect_to root_path
     end
 
     puts "finished searching for tracks"
