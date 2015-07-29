@@ -9,7 +9,7 @@
   <h3>Signed in to Twitter!</h3>
 <% else %>
   <form action='/auth/twitter' method='get'>
-    <input type="submit" value="Sign into Twitter">
+    <input class='btn btn-primary' type="submit" value="Sign into Twitter">
   </form>
 <% end %>
     </div>
@@ -19,7 +19,7 @@
   <h3>Signed in to Spotify!</h3>
 <% else %>
   <form action='/auth/spotify' method='get'>
-    <input type="submit" value="Sign into Spotify">
+    <input class='btn btn-primary' type="submit" value="Sign into Spotify">
   </form>
 <% end %>
 
@@ -50,7 +50,7 @@
     <div class="radio">
       <label><input type="radio" name="random" value="super_random">Random track from random album (might take a while)</label>
     </div>
-    <input type="submit" value="Create Playlist">
+    <input class='btn btn-primary' type="submit" value="Create Playlist">
   </form>
   <br>
 <% end %>

@@ -2,7 +2,6 @@ class PlaylistController < ApplicationController
   def create
     spotify_tracks = []
     puts "ready to create a playlist"
-    debugger
     type = params[:random] || "top"
     playlist_name = params[:name] || "a playlist"
 
