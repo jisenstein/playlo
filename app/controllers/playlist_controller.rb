@@ -23,7 +23,6 @@ class PlaylistController < ApplicationController
       puts error
       flash[:notice] = "Hit spotify rate limit."
       if spotify_tracks.count > 0
-        return
       else
         redirect_to root_path
       end
