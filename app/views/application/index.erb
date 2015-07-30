@@ -3,10 +3,11 @@
   <br>
 <% end %>
 
+<div class='sign_in_bts'>
 <% if session['twitter_signed_in'] %>
   <h3>Signed in to Twitter!</h3>
 <% else %>
-  <form action='/auth/twitter' method='get'>
+  <form class='sign_in_bt' action='/auth/twitter' method='get'>
     <input class='twitter-sign-in' type="submit" value="">
   </form>
 <% end %>
@@ -14,16 +15,17 @@
 <% if session['spotify_signed_in'] %>
   <h3>Signed in to Spotify!</h3>
 <% else %>
-  <form action='/auth/spotify' method='get'>
+  <form class='sign_in_bt' action='/auth/spotify' method='get'>
     <input class='spotify-sign-in' type="submit" value="">
   </form>
 <% end %>
 
 <% if session['twitter_signed_in'] || session['spotify_signed_in'] %>
-  <form action='/signout' method='get'>
+  <form class='sign_in_bt' action='/signout' method='get'>
     <button class='btn btn-primary' type='submit'>Sign out</button>
   </form>
 <% end %>
+</div>
 
 <% if true || (session['twitter_signed_in'] && session['spotify_signed_in']) %>
  <form role="form" action='/create_playlist' method='get'>
@@ -44,5 +46,10 @@
   </form>
   <br>
 <% end %>
-
-<div class="twitter-logo"></div>
+<style>
+.sign_in_bts{
+  margin-left: 450px;
+}
+form.sign_in_bt {
+} 
+</style>
