@@ -27,7 +27,7 @@
 <% end %>
 </div>
 
-<% if true || (session['twitter_signed_in'] && session['spotify_signed_in']) %>
+<% if (session['twitter_signed_in'] && session['spotify_signed_in'] %>
  <form role="form" action='/create_playlist' method='get'>
     <div class="form-group">
       <label for="name">Playlist name:</label>
@@ -39,9 +39,9 @@
     <div class="radio">
       <label><input type="radio" name="random" value="random">Random top tracks</label>
     </div>
-    <div class="radio">
-      <label><input type="radio" name="random" value="super_random">Random track from random album (might take a while)</label>
-    </div>
+    <%#<div class="radio">%>
+      <%#<label><input type="radio" name="random" value="super_random">Random track from random album (might take a while)</label>%>
+    <%#</div>%>
     <input class='create-spotify' type="submit" value="">
   </form>
   <br>
