@@ -14,7 +14,10 @@ class PlaylistController < ApplicationController
           artists = RSpotify::Artist.search(friend, limit: 1)
           if (a = artists[0]) && a.popularity > 20
             puts "got artist match #{a.name}"
-            spotify_tracks << send(type, a)
+            track = send(type, a)
+            if track.class == RSpotify::Track
+              spotify_tracks << send(type, a)
+            end
           end
         end
       end
