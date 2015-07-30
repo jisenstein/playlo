@@ -3,39 +3,29 @@
   <br>
 <% end %>
 
-<div id='container'>
-    <div class='sign_in_bt'>
 <% if session['twitter_signed_in'] %>
   <h3>Signed in to Twitter!</h3>
 <% else %>
   <form action='/auth/twitter' method='get'>
-    <input class='btn btn-primary' type="submit" value="Sign in to Twitter">
+    <input class='twitter-sign-in' type="submit" value="">
   </form>
 <% end %>
-    </div>
 
-<div class='sign_in_bt'>
 <% if session['spotify_signed_in'] %>
   <h3>Signed in to Spotify!</h3>
 <% else %>
   <form action='/auth/spotify' method='get'>
-    <input class='btn btn-primary' type="submit" value="Sign in to Spotify">
+    <input class='spotify-sign-in' type="submit" value="">
   </form>
 <% end %>
 
-</div>
-
-<div class='sign_in_bt'>
 <% if session['twitter_signed_in'] || session['spotify_signed_in'] %>
   <form action='/signout' method='get'>
     <button class='btn btn-primary' type='submit'>Sign out</button>
   </form>
 <% end %>
-</div>
 
-</div>
-
-<% if session['twitter_signed_in'] && session['spotify_signed_in'] %>
+<% if true || (session['twitter_signed_in'] && session['spotify_signed_in']) %>
  <form role="form" action='/create_playlist' method='get'>
     <div class="form-group">
       <label for="name">Playlist name:</label>
@@ -50,7 +40,9 @@
     <div class="radio">
       <label><input type="radio" name="random" value="super_random">Random track from random album (might take a while)</label>
     </div>
-    <input class='btn btn-primary' type="submit" value="Create Playlist">
+    <input class='create-spotify' type="submit" value="">
   </form>
   <br>
 <% end %>
+
+<div class="twitter-logo"></div>
