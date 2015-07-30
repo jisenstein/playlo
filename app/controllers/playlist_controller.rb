@@ -3,6 +3,7 @@ class PlaylistController < ApplicationController
     spotify_tracks = []
     puts "ready to create a playlist"
     type = params[:random] || "top"
+
     playlist_name = params[:name] || "a playlist"
 
     friends = Rails.cache.fetch(session['access_token'])
@@ -13,14 +14,7 @@ class PlaylistController < ApplicationController
           artists = RSpotify::Artist.search(friend, limit: 1)
           if (a = artists[0]) && a.popularity > 20
             puts "got artist match #{a.name}"
-            spotify_tracks << case type
-            when "top"
-              a.top_tracks(:US).first
-            when "random"
-              a.top_tracks(:US).sample
-            when "super_random"
-              a.albums(limit: 7, country: 'US').sample.tracks.sample
-            end
+            spotify_tracks << send(type, a)
           end
         end
       end
@@ -53,5 +47,17 @@ class PlaylistController < ApplicationController
     end
 
     redirect_to root_path
+  end
+
+  def top(a)
+    a.top_tracks(:US).first
+  end
+
+  def random(a)
+    a.top_tracks(:US).sample
+  end
+
+  def super_random(a)
+    a.albums(limit: 7, country: 'US').sample.tracks.sample
   end
 end
