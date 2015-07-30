@@ -7,11 +7,12 @@ class PlaylistController < ApplicationController
 
     friends = Rails.cache.fetch(session['access_token'])
     begin
-      end
       if !friends.blank?
         friends.each do |friend|
+          puts "fetching artist for #{friend}"
           artists = RSpotify::Artist.search(friend, limit: 1)
           if (a = artists[0]) && a.popularity > 20
+            puts "got artist match #{a.name}"
             spotify_tracks << case type
             when "top"
               a.top_tracks(:US).first
@@ -27,7 +28,11 @@ class PlaylistController < ApplicationController
       puts "GOT A SPOTIFY RATE LIMIT"
       puts error
       flash[:notice] = "Hit spotify rate limit."
-      redirect_to root_path
+      if spotify_tracks.count > 0
+        return
+      else
+        redirect_to root_path
+      end
     end
 
     puts "finished searching for tracks"
