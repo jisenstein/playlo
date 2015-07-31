@@ -3,6 +3,7 @@ class PlaylistCreator
   def create_playlist(param_type, param_name, cache_key, spotify_credentials)
     spotify_tracks = []
     Delayed::Worker.logger.debug("ready to create a playlist")
+    puts "ready to create a playlist"
     type = param_type || "top"
 
     playlist_name = param_name || "a playlist"
@@ -10,8 +11,9 @@ class PlaylistCreator
     friends = Rails.cache.fetch(cache_key)
     begin
       if !friends.blank?
-        friends[0..25].each do |friend|
+        friends.each do |friend|
           Delayed::Worker.logger.debug("fetching artist for #{friend}")
+          puts "fetching artist for #{friend}"
           artists = RSpotify::Artist.search(friend, limit: 1)
           if (a = artists[0]) && a.popularity > 20
             Delayed::Worker.logger.debug("got artist match #{a.name}")
@@ -23,17 +25,19 @@ class PlaylistCreator
         end
       end
     rescue RestClient::TooManyRequests => error
+      puts "spotify rate limit"
       Delayed::Worker.logger.debug("GOT A SPOTIFY RATE LIMIT")
       Delayed::Worker.logger.debug(error)
     end
 
-    Delayed::Worker.logger.debug("finished searching for tracks")
     Delayed::Worker.logger.debug("about to log into spotify")
+    puts "logging into spotify"
 
     if !spotify_tracks.blank?
       spotify_user = RSpotify::User.new(spotify_credentials)
 
       Delayed::Worker.logger.debug("logged into spotify")
+      puts "logged in"
 
       playlist = spotify_user.create_playlist!(playlist_name)
       playlist.change_details!(public: false)
