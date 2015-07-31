@@ -28,7 +28,6 @@ class PlaylistCreator
         puts "friends is blank"
       end
     rescue RestClient::TooManyRequests => error
-      debugger
       puts "spotify rate limit"
       puts "error"
       puts error
