@@ -11,22 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150727062018) do
+ActiveRecord::Schema.define(version: 20150731041357) do
 
-  create_table "playlists_tracks", force: :cascade do |t|
-    t.integer "track_id"
-    t.integer "playlist_id"
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "playlists_tracks", ["playlist_id"], name: "index_playlists_tracks_on_playlist_id"
-  add_index "playlists_tracks", ["track_id"], name: "index_playlists_tracks_on_track_id"
-
-  create_table "twitter_friends_users", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "twitter_friend_id"
-  end
-
-  add_index "twitter_friends_users", ["twitter_friend_id"], name: "index_twitter_friends_users_on_twitter_friend_id"
-  add_index "twitter_friends_users", ["user_id"], name: "index_twitter_friends_users_on_user_id"
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
 end

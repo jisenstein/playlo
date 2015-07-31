@@ -28,7 +28,7 @@
 </div>
 
 <% if session['twitter_signed_in'] && session['spotify_signed_in'] %>
- <form role="form" action='/create_playlist' method='get'>
+  <form class="create_playlist" role="form" action='/create_playlist' method='get'>
     <div class="form-group">
       <label for="name">Playlist name:</label>
       <input type="text" class="form-control" id="name" name="name" placeholder="Enter playlist name">
@@ -46,6 +46,16 @@
   </form>
   <br>
 <% end %>
+
+<script type="text/javascript">
+$('form.create_playlist').submit(function(e){
+  if (!$('input.form-control').val()) {
+    alert("enter a name for your playlist!");
+    return false;
+  }
+})
+
+</script>
 <style>
 .sign_in_bts{
   margin-left: 397px;
