@@ -32,7 +32,7 @@ class SessionsController < ApplicationController
       friends = client.friends({ count: 200, skip_status: true, include_user_entities: false })
       friends.each do |f|
         if f.verified?
-          verified_friend_names << f.name
+          verified_friend_names << [f.name, f.id]
         end
       end
     rescue Twitter::Error::TooManyRequests => error

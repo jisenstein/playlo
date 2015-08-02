@@ -11,15 +11,29 @@ class PlaylistCreator
 
     begin
       if !friends.blank?
-        friends.shuffle.each do |friend|
-          puts "fetching artist for #{friend}"
-          artists = RSpotify::Artist.search(friend, limit: 1)
-          if (a = artists[0]) && a.popularity > 20
-            puts "got artist match #{a.name}"
-            track = send(type, a)
-            if track.class == RSpotify::Track
+        friends.shuffle.each do |friend, twitter_id|
+          if (match = TwitterSpotifyMapping.find_by_twitter_id(twitter_id))
+            puts "pulling from DB"
+            # already seen this twitter account
+            if match.spotify_artist_id.present?
+              a = RSpotify::Artist.find(match.spotify_artist_id)
               playlist.add_tracks!([send(type, a)])
             end
+          else
+            puts "need to re search"
+            # new twitter account
+            new_match = TwitterSpotifyMapping.new(twitter_id: twitter_id, twitter_name: friend)
+            artists = RSpotify::Artist.search(friend, limit: 1)
+            if (a = artists[0]) && a.popularity > 20
+              puts "got artist match #{a.name}"
+              new_match.spotify_artist_id = a.id
+              new_match.spotify_name = a.name
+              track = send(type, a)
+              if track.class == RSpotify::Track
+                playlist.add_tracks!([send(type, a)])
+              end
+            end
+            new_match.save
           end
         end
       else

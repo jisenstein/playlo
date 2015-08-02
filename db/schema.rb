@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150731041357) do
+ActiveRecord::Schema.define(version: 20150802090530) do
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -28,5 +28,19 @@ ActiveRecord::Schema.define(version: 20150731041357) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+
+  create_table "twitter_spotify_mappings", force: :cascade do |t|
+    t.string   "spotify_artist_id"
+    t.string   "twitter_name"
+    t.string   "spotify_name"
+    t.string   "top_track_id"
+    t.boolean  "is_correct_match",            default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "twitter_id",        limit: 8
+  end
+
+  add_index "twitter_spotify_mappings", ["spotify_artist_id"], name: "index_twitter_spotify_mappings_on_spotify_artist_id"
+  add_index "twitter_spotify_mappings", ["twitter_id"], name: "index_twitter_spotify_mappings_on_twitter_id", unique: true
 
 end
