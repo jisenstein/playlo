@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
       session[:twitter_signed_in] = true
       redirect_to root_path
     rescue
+      flash[:notice] = "Error logging into Twitter, please try again later."
       redirect_to root_path
     end
   end
@@ -15,7 +16,6 @@ class SessionsController < ApplicationController
   def spotify
     session[:spotify_credentials] = request.env['omniauth.auth']
     session[:spotify_signed_in] = true
-    puts "logged into spotify"
     redirect_to root_path
   end
 
@@ -30,9 +30,9 @@ class SessionsController < ApplicationController
       client = twitter_client
       verified_friend_names = []
       friends = client.friends({ count: 200, skip_status: true, include_user_entities: false })
-      friends.each do |f|
-        if f.verified?
-          verified_friend_names << [f.name, f.id]
+      friends.each do |friend|
+        if friend.verified?
+          verified_friend_names << [friend.name, friend.id]
         end
       end
     rescue Twitter::Error::TooManyRequests => error

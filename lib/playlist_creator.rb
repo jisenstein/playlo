@@ -1,10 +1,11 @@
 class PlaylistCreator
   def create_playlist(param_type, param_name, friends, spotify_credentials)
-    puts "ready to create a playlist"
+    playlist_name = param_name || "a playlist"
     type = param_type || "top"
 
-    playlist_name = param_name || "a playlist"
+    puts "Ready to create a playlist: #{playlist_name}."
 
+    # Create user and empty playlist.
     spotify_user = RSpotify::User.new(spotify_credentials)
     playlist = spotify_user.create_playlist!(playlist_name)
     playlist.change_details!(public: false)
@@ -13,36 +14,32 @@ class PlaylistCreator
       if !friends.blank?
         friends.shuffle.each do |friend, twitter_id|
           if (match = TwitterSpotifyMapping.find_by_twitter_id(twitter_id))
-            puts "pulling from DB"
-            # already seen this twitter account
+            puts "Fetched match from database."
             if match.spotify_artist_id.present?
               a = RSpotify::Artist.find(match.spotify_artist_id)
               playlist.add_tracks!([send(type, a)])
             end
           else
-            puts "need to re search"
-            # new twitter account
+            puts "New twitter account."
             new_match = TwitterSpotifyMapping.new(twitter_id: twitter_id, twitter_name: friend)
             artists = RSpotify::Artist.search(friend, limit: 1)
             if (a = artists[0]) && a.popularity > 20
-              puts "got artist match #{a.name}"
+              puts "Got artist match: #{a.name}."
               new_match.spotify_artist_id = a.id
               new_match.spotify_name = a.name
               track = send(type, a)
               if track.class == RSpotify::Track
-                playlist.add_tracks!([send(type, a)])
+                playlist.add_tracks!([track])
               end
             end
             new_match.save
           end
         end
       else
-        puts "friends is blank"
+        puts "No Twitter friends, created empty playlist."
       end
     rescue RestClient::TooManyRequests => error
-      puts "spotify rate limit"
-      puts "error"
-      puts error
+      puts "Error: spotify rate limit -- #{error}"
     end
   end
 
