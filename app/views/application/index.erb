@@ -1,30 +1,32 @@
-<% if flash[:notice] %>
-  <h3 class="alert alert-info" role="alert"><%= flash[:notice] %></h3>
-  <br>
-<% end %>
+<div class="top_info">
+  <% if flash[:notice] %>
+    <h3 class="alert alert-info" role="alert"><%= flash[:notice] %></h3>
+  <% end %>
+
+  <% if session['twitter_signed_in'] || session['spotify_signed_in'] %>
+    <form class='sign_out_bt' action='/signout' method='get'>
+      <button class='signout_bt btn btn-primary' type='submit'>Sign out</button>
+    </form>
+  <% end %>
+</div>
+
 
 <div class='sign_in_bts'>
-<% if session['twitter_signed_in'] %>
-  <h2 class="sign_in_msg"><span class="label label-default">Signed in to Twitter!<span></h2>
-<% else %>
-  <form class='sign_in_bt' action='/auth/twitter' method='get'>
-    <input class='twitter-sign-in' type="submit" value="">
-  </form>
-<% end %>
+  <% if session['twitter_signed_in'] %>
+    <h2 class="sign_in_msg"><span class="label label-default">Signed in to Twitter<span></h2>
+  <% else %>
+    <form class='sign_in_msg' action='/auth/twitter' method='get'>
+      <input class='twitter-sign-in' type="submit" value="">
+    </form>
+  <% end %>
 
-<% if session['spotify_signed_in'] %>
-  <h2 class="sign_in_msg"><span class="label label-default">Signed in to Spotify!</span></h2>
-<% else %>
-  <form class='sign_in_bt' action='/auth/spotify' method='get'>
-    <input class='spotify-sign-in' type="submit" value="">
-  </form>
-<% end %>
-
-<% if session['twitter_signed_in'] || session['spotify_signed_in'] %>
-  <form class='sign_out_bt' action='/signout' method='get'>
-    <button class='signout_bt btn btn-primary' type='submit'>Sign out</button>
-  </form>
-<% end %>
+  <% if session['spotify_signed_in'] %>
+    <h2 class="sign_in_msg"><span class="label label-default">Signed in to Spotify</span></h2>
+  <% else %>
+    <form class='sign_in_msg' action='/auth/spotify' method='get'>
+      <input class='spotify-sign-in' type="submit" value="">
+    </form>
+  <% end %>
 </div>
 
 <% if session['twitter_signed_in'] && session['spotify_signed_in'] %>
@@ -47,32 +49,54 @@
 <% end %>
 
 <script type="text/javascript">
-$('form.create_playlist').submit(function(e){
-  if (!$('input.form-control').val()) {
-    alert("enter a name for your playlist!");
-    return false;
-  }
-})
-
+  $('form.create_playlist').submit(function(e){
+    if (!$('input.form-control').val()) {
+      alert("enter a name for your playlist!");
+      return false;
+    }
+  })
 </script>
+
 <style>
-.sign_in_bts {
-  margin-left: 397px;
-}
+  .sign_in_bts {
+    margin-left: 370px;
+    display: inline-block;
+  }
 
-.sign_in_msg {
-  display: inline-block;
-  padding-left: 60px;
-  padding-top: 20px;
-}
+  .sign_in_msg {
+    display: inline-block;
+    padding-left: 100px;
+    padding-top: 20px;
+  }
 
-.signout_bt {
-  margin-left: 22px;
-}
+  .signout_bt {
+    float: right;
+    margin-left: 22px;
+  }
 
-.alert {
-  width: 595px;
-  margin-left: 20px;
-  text-align: center;
-}
+  .alert {
+    display: inline-block;
+    width: 595px;
+    margin-left: 20px;
+    text-align: center;
+  }
+
+  form.sign_in_msg {
+    width: 330px;
+  }
+
+  form.sign_out_bt {
+    float: right;
+    display: inline;
+    margin-top: -30px;
+    padding-right: 30px;
+  }
+
+  .top_info {
+    display: inline;
+  }
+
+  .label-default {
+    font-weight: 100;
+  }
 </style>
