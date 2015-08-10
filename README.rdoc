@@ -1,3 +1,3 @@
 == PLAYLO
 
-Create a Spotify playlist with one song from each artist you follow on Twitter!
+Create a Spotify playlist with one song from each artist you follow on Twitter.
