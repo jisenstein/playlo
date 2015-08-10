@@ -1,11 +1,11 @@
 <% if flash[:notice] %>
-  <h3><%= flash[:notice] %></h3>
+  <h3 class="alert alert-info" role="alert"><%= flash[:notice] %></h3>
   <br>
 <% end %>
 
 <div class='sign_in_bts'>
 <% if session['twitter_signed_in'] %>
-  <h3>Signed in to Twitter!</h3>
+  <h2 class="sign_in_msg"><span class="label label-default">Signed in to Twitter!<span></h2>
 <% else %>
   <form class='sign_in_bt' action='/auth/twitter' method='get'>
     <input class='twitter-sign-in' type="submit" value="">
@@ -13,7 +13,7 @@
 <% end %>
 
 <% if session['spotify_signed_in'] %>
-  <h3>Signed in to Spotify!</h3>
+  <h2 class="sign_in_msg"><span class="label label-default">Signed in to Spotify!</span></h2>
 <% else %>
   <form class='sign_in_bt' action='/auth/spotify' method='get'>
     <input class='spotify-sign-in' type="submit" value="">
@@ -21,8 +21,8 @@
 <% end %>
 
 <% if session['twitter_signed_in'] || session['spotify_signed_in'] %>
-  <form class='sign_in_bt' action='/signout' method='get'>
-    <button class='btn btn-primary' type='submit'>Sign out</button>
+  <form class='sign_out_bt' action='/signout' method='get'>
+    <button class='signout_bt btn btn-primary' type='submit'>Sign out</button>
   </form>
 <% end %>
 </div>
@@ -30,8 +30,7 @@
 <% if session['twitter_signed_in'] && session['spotify_signed_in'] %>
   <form class="create_playlist" role="form" action='/create_playlist' method='get'>
     <div class="form-group">
-      <label for="name">Playlist name:</label>
-      <input type="text" class="form-control" id="name" name="name" placeholder="Enter playlist name">
+      <input type="text" class="form-control" id="name" name="name" placeholder="Playlist name">
     </div>
     <div class="radio">
       <label><input type="radio" name="random" value="top">Top tracks</label>
@@ -39,9 +38,9 @@
     <div class="radio">
       <label><input type="radio" name="random" value="random">Random top tracks</label>
     </div>
-    <%#<div class="radio">%>
-      <%#<label><input type="radio" name="random" value="super_random">Random track from random album (might take a while)</label>%>
-    <%#</div>%>
+    <div class="radio">
+      <label><input type="radio" name="random" value="super_random">Random tracks from random albums</label>
+    </div>
     <input class='create-spotify' type="submit" value="">
   </form>
   <br>
@@ -57,9 +56,23 @@ $('form.create_playlist').submit(function(e){
 
 </script>
 <style>
-.sign_in_bts{
+.sign_in_bts {
   margin-left: 397px;
 }
-form.sign_in_bt {
-} 
+
+.sign_in_msg {
+  display: inline-block;
+  padding-left: 60px;
+  padding-top: 20px;
+}
+
+.signout_bt {
+  margin-left: 22px;
+}
+
+.alert {
+  width: 595px;
+  margin-left: 20px;
+  text-align: center;
+}
 </style>

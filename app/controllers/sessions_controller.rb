@@ -1,4 +1,4 @@
-class SessionsController < ApplicationController 
+class SessionsController < ApplicationController
   def twitter
     credentials = request.env['omniauth.auth']['credentials']
     session[:access_token] = credentials['token']
