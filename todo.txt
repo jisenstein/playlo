@@ -1,11 +1,7 @@
 Form for playlist creation
  - songs per artist
- - sentence style song curation
+ - sentence style playlist curation
 
 Miscellaneous
  - make hash of bad accounts and filter out on twitter login
- - factor out case statement in playlists controller
- - make functions (model?) to get types of tracks
  - add Instagram/Facebook sign in
-
-cAgP99meitusx6
