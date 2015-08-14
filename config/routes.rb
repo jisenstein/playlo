@@ -5,5 +5,8 @@ Rails.application.routes.draw do
   get '/auth/spotify/callback', to: 'sessions#spotify'
   get '/signout', to: 'sessions#destroy'
 
-  get '/create_playlist', to: 'playlist#create'
+  resources :playlists
+  # get '/create_playlist', to: 'playlist#create'
+
+  # get '/'
 end

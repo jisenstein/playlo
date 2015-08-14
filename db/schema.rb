@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150802090530) do
+ActiveRecord::Schema.define(version: 20150813081021) do
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -28,6 +28,14 @@ ActiveRecord::Schema.define(version: 20150802090530) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+
+  create_table "playlists", force: :cascade do |t|
+    t.integer  "artists_parsed", default: 0
+    t.integer  "total_artists"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+  end
 
   create_table "twitter_spotify_mappings", force: :cascade do |t|
     t.string   "spotify_artist_id"
