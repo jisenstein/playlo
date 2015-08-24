@@ -1,11 +1,11 @@
 class PlaylistCreator
-  UNIT = 10
+  UNIT = 5
   def create_playlist(type, playlist_name, friends, spotify_credentials, playlist_record)
     puts "Ready to create a playlist: #{playlist_name}."
     @p = playlist_record
     @track_count = 0
 
-    # Create user and empty playlist.
+    # Create user and blank playlist.
     spotify_user = RSpotify::User.new(spotify_credentials)
     playlist = spotify_user.create_playlist!(playlist_name)
     playlist.change_details!(public: false)
@@ -14,8 +14,7 @@ class PlaylistCreator
     begin
       if !friends.blank?
         friends.shuffle.each do |friend, twitter_id|
-          if count % 5 == 0
-            # playlist.artists_parsed += 1
+          if count % UNIT == 0
             @p.save
           end
           if (match = TwitterSpotifyMapping.find_by_twitter_id(twitter_id))

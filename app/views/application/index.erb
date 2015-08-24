@@ -98,7 +98,7 @@ function getProgress(playlist_id) {
           //  debugger;
           var json = response.responseJSON;
           if (json.status == 400) {
-            console.log("increasing width");
+            console.log("increasing width to " + json.percent);
             $progressBar.css('width', json.percent)
           } else if (json.status == 200) {
             console.log("at 100%");
@@ -109,7 +109,7 @@ function getProgress(playlist_id) {
           }
         }
       });
-    }, 1500);
+    }, 3000);
   };
 </script>
 
