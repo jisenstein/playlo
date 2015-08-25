@@ -18,7 +18,7 @@
 
 $('form.create_playlist').submit(function(e){
   if (!$('input.form-control').val()) {
-    alert("enter a name for your playlist!");
+    alert("Enter a name for your playlist!");
     return false;
   }
 
@@ -47,6 +47,7 @@ $('form.create_playlist').submit(function(e){
 });
 
 var $progressBar = $('.progress-bar');
+
 function getProgress(playlist_id) {
   var timerId = setInterval(function() {
     $.ajax({
@@ -73,4 +74,4 @@ function getProgress(playlist_id) {
 function showAlert(text) {
   $('.alerts_text').empty().append(text);
   $('.alert').show();
-}
+};
