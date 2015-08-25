@@ -33,6 +33,7 @@ $('form.create_playlist').submit(function(e){
       if (json.status == 200) {
         getProgress(json.playlist_id);
       } else {
+        // Reload the page if there was an error.
         location.reload();
       }
     }

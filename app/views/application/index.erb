@@ -1,3 +1,13 @@
+<%
+  both_signed_in = (session['twitter_signed_in'] && session['spotify_signed_in'])
+%>
+
+<% if both_signed_in %>
+  <form class="signout" action='/signout' method='get'>
+    <button class='btn btn-default' type='submit'>Sign out</button>
+  </form>
+<% end %>
+
 <div class="content_container">
   <div class="shorten_width">
     <legend>
@@ -7,7 +17,7 @@
     </legend>
 
     <div class="progress" style="display:none">
-      <div class="progress-bar" role="progressbar" style="width: 2%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+      <div class="progress-bar progress-bar-striped active" role="progressbar" style="width: 2%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
       </div>
     </div>
 
@@ -26,23 +36,7 @@
       </div>
     <% end %>
 
-    <form class='buttons' action='/auth/twitter' method='get'>
-      <% if !session['twitter_signed_in'] %>
-        <button class='twitter_button btn btn-default' type="submit">Sign in to Twitter</button>
-      <% else %>
-        <button class='twitter_button signed_in btn btn-default' type="submit" disabled="true">Signed in to Twitter</button>
-      <% end %>
-    </form>
-
-    <form class='buttons' action='/auth/spotify' method='get'>
-      <% if !session['spotify_signed_in'] %>
-        <button class='spotify_button btn btn-default' type="submit">Sign in to Spotify</button>
-      <% else %>
-        <button class='spotify_button signed_in btn btn-default' type="submit" disabled="true">Signed in to Spotify</button>
-      <% end %>
-    </form>
-
-    <% if session['twitter_signed_in'] && session['spotify_signed_in'] %>
+    <% if both_signed_in %>
       <form class="create_playlist" role="form" action='/playlists' method='get'>
         <div class="form-group">
           <input type="text" class="form-control" id="name" name="name" placeholder="Playlist name">
@@ -55,9 +49,21 @@
         </div>
         <button class="create btn btn-default" type="submit" style="display:inherit">Create Spotify Playlist</button>
       </form>
+    <% else %>
+      <form class='buttons' action='/auth/twitter' method='get'>
+        <% if !session['twitter_signed_in'] %>
+          <button class='twitter_button btn btn-default' type="submit">Sign in to Twitter</button>
+        <% else %>
+          <button class='twitter_button signed_in btn btn-default' type="submit" disabled="true">Signed in to Twitter</button>
+        <% end %>
+      </form>
 
-      <form class="" action='/signout' method='get'>
-        <button class='signout btn btn-default' type='submit'>Sign out</button>
+      <form class='buttons' action='/auth/spotify' method='get'>
+        <% if !session['spotify_signed_in'] %>
+          <button class='spotify_button btn btn-default' type="submit">Sign in to Spotify</button>
+        <% else %>
+          <button class='spotify_button signed_in btn btn-default' type="submit" disabled="true">Signed in to Spotify</button>
+        <% end %>
       </form>
     <% end %>
 
