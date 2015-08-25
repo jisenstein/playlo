@@ -25,12 +25,8 @@ $('form.create_playlist').submit(function(e){
   $('.progress-bar').css('width', '2%');
   $('.progress').show();
 
-  var $form = $(this);
-  var count = 0;
-  var playlist_id = -1;
-
   $.ajax({
-    url: '/playlists?' + $form.serialize(),
+    url: '/playlists?' + $(this).serialize(),
     method: 'POST',
     complete: function(response) {
       var json = response.responseJSON;
