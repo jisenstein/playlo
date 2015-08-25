@@ -15,36 +15,78 @@
  *= require bootstrap.min
  */
 
-body {
-  background-color: #b0c4de !important;
+*{font-family:Avenir;}
+
+.navbar .navbar-nav {
+  display: inline-block;
+  float: none;
+  vertical-align: top;
+}
+
+.navbar .navbar-collapse {
+  text-align: center;
+  border: none;
+  font-size: 32px;
+  margin-top: 2px;
 }
 
 nav {
-  height: 70px;
+  height: 35px;
 }
 
-nav p{
-  padding-top: 5px;
-  font-size: 40px;
+footer {
+  margin-top: 40px;
+  text-align: center;
 }
 
-.twitter-sign-in{
-  background-image:url('<%= asset_path("twitter-sign-in.png")%>');
-  height: 28px;
-  width: 158px;
+.content_container {
+  margin-top: 70px;
 }
 
-.spotify-sign-in {
-  background-image:url('<%= asset_path("log_in-desktop-small.png")%>');
-  background-color: #b0c4de;
-  height: 32px;
-  width: 194px;
+.shorten_width {
+  width: 50%;
+  margin: auto;
 }
 
-.create-spotify {
-  background-image:url('<%= asset_path("create_playlist-green.png")%>');
-  height: 66px;
-  width: 178px;
-  margin-left: 165px;
-  margin-top: 10px;
+.center {
+  text-align: center;
+}
+
+.spotify_button {
+   float: right;
+ }
+
+.twitter_button {
+  float: left;
+}
+
+.signed_in {
+  cursor: default !important;
+}
+
+.create {
+  margin: auto;
+}
+
+div.progress-bar {
+  background-color: #555;
+}
+
+form.buttons {
+  display: inline;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.buttons_container {
+  margin: auto;
+  width: 427px;
+}
+
+.signout {
+  float: right;
+}
+
+.alert {
+  background-color: #d3d3d3;
 }

@@ -1,169 +1,65 @@
-<div class="progress" style="display:none">
-  <div class="progress-bar progress-bar-striped active" role="progressbar" style="width: 2%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+<div class="content_container">
+  <div class="shorten_width">
+    <legend>
+      <p class="center">
+        Playlo creates a Spotify playlist with a single song from every artist or musician you follow on Twitter.
+      </p>
+    </legend>
+
+    <div class="progress" style="display:none">
+      <div class="progress-bar" role="progressbar" style="width: 2%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+      </div>
+    </div>
+
+    <% if flash[:notice] %>
+      <div class="alert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <div class="alerts_text">
+          <%= flash[:notice] %>
+        </div>
+      </div>
+    <% else %>
+      <div class="alert" style="display:none">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <div class="alerts_text">
+        </div>
+      </div>
+    <% end %>
+
+    <form class='buttons' action='/auth/twitter' method='get'>
+      <% if !session['twitter_signed_in'] %>
+        <button class='twitter_button btn btn-default' type="submit">Sign in to Twitter</button>
+      <% else %>
+        <button class='twitter_button signed_in btn btn-default' type="submit" disabled="true">Signed in to Twitter</button>
+      <% end %>
+    </form>
+
+    <form class='buttons' action='/auth/spotify' method='get'>
+      <% if !session['spotify_signed_in'] %>
+        <button class='spotify_button btn btn-default' type="submit">Sign in to Spotify</button>
+      <% else %>
+        <button class='spotify_button signed_in btn btn-default' type="submit" disabled="true">Signed in to Spotify</button>
+      <% end %>
+    </form>
+
+    <% if session['twitter_signed_in'] && session['spotify_signed_in'] %>
+      <form class="create_playlist" role="form" action='/playlists' method='get'>
+        <div class="form-group">
+          <input type="text" class="form-control" id="name" name="name" placeholder="Playlist name">
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="random" value="top">Top tracks</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="random" value="random">Random top tracks</label>
+        </div>
+        <button class="create btn btn-default" type="submit" style="display:inherit">Create Spotify Playlist</button>
+      </form>
+
+      <form class="" action='/signout' method='get'>
+        <button class='signout btn btn-default' type='submit'>Sign out</button>
+      </form>
+    <% end %>
+
   </div>
 </div>
-
-<div class="alerts_container">
-</div>
-
-<div class="top_info">
-  <% if flash[:notice] %>
-    <h3 class="alert alert-info" role="alert"><%= flash[:notice] %></h3>
-  <% end %>
-
-  <% if session['twitter_signed_in'] || session['spotify_signed_in'] %>
-    <form class='sign_out_bt' action='/signout' method='get'>
-      <button class='signout_bt btn btn-primary' type='submit'>Sign out</button>
-    </form>
-  <% end %>
-</div>
-
-
-<div class='sign_in_bts'>
-  <% if session['twitter_signed_in'] %>
-    <h2 class="sign_in_msg"><span class="label label-default">Signed in to Twitter<span></h2>
-  <% else %>
-    <form class='sign_in_msg' action='/auth/twitter' method='get'>
-      <input class='twitter-sign-in' type="submit" value="">
-    </form>
-  <% end %>
-
-  <% if session['spotify_signed_in'] %>
-    <h2 class="sign_in_msg"><span class="label label-default">Signed in to Spotify</span></h2>
-  <% else %>
-    <form class='sign_in_msg' action='/auth/spotify' method='get'>
-      <input class='spotify-sign-in' type="submit" value="">
-    </form>
-  <% end %>
-</div>
-
-<% if true || session['twitter_signed_in'] && session['spotify_signed_in'] %>
-  <form class="create_playlist" role="form" action='/playlists' method='get'>
-    <div class="form-group">
-      <input type="text" class="form-control" id="name" name="name" placeholder="Playlist name">
-    </div>
-    <div class="radio">
-      <label><input type="radio" name="random" value="top">Top tracks</label>
-    </div>
-    <div class="radio">
-      <label><input type="radio" name="random" value="random">Random top tracks</label>
-    </div>
-    <%#<div class="radio">%>
-      <%#<label><input type="radio" name="random" value="super_random">Random tracks from random albums</label>%>
-    <%#</div>%>
-    <input class='create-spotify' type="submit" value="">
-  </form>
-  <br>
-<% end %>
-
-<script type="text/javascript">
-  $('form.create_playlist').submit(function(e){
-    if (!$('input.form-control').val()) {
-      alert("enter a name for your playlist!");
-      return false;
-    }
-
-    $('.progress-bar').css('width', '2%');
-    $('.progress').show();
-
-    // debugger;
-    var $form = $(this);
-    var count = 0;
-    var playlist_id = -1;
-
-    $.ajax({
-      url: '/playlists?' + $form.serialize(),
-      method: 'POST',
-      complete: function(response) {
-        var json = response.responseJSON;
-       //  debugger;
-        if (json.status == 200) {
-          getProgress(json.playlist_id);
-        }
-      }
-    });
-
-    return false;
-  })
-
-var $progressBar = $('.progress-bar');
-function getProgress(playlist_id) {
-  // debugger;
-    var timerId = setInterval(function() {
-      $.ajax({
-        url: '/playlists/' + playlist_id,
-        method: 'PUT',
-        complete: function(response) {
-          console.log("got response");
-          //  debugger;
-          var json = response.responseJSON;
-          if (json.status == 400) {
-            console.log("increasing width to " + json.percent);
-            $progressBar.css('width', json.percent)
-          } else if (json.status == 200) {
-            console.log("at 100%");
-            $progressBar.css('width', '100%');
-            clearInterval(timerId);
-            $('.progress').hide();
-            $('.alerts_container').empty().append(json.alert);
-          }
-        }
-      });
-    }, 3000);
-  };
-</script>
-
-<style>
-  .sign_in_bts {
-    margin-left: 356px;
-    display: inline-block;
-  }
-
-  .sign_in_msg {
-    display: inline-block;
-    padding-left: 95px;
-    padding-top: 20px;
-  }
-
-  .signout_bt {
-    float: right;
-    margin-left: 22px;
-  }
-
-  .alert {
-    display: inline-block;
-    width: 1000px;
-    margin-left: 20px;
-    text-align: center
-  }
-
-  form.sign_in_msg {
-    width: 330px;
-  }
-
-  form.sign_out_bt {
-    float: right;
-    display: inline;
-    margin-top: -30px;
-    padding-right: 30px;
-  }
-
-  .top_info {
-    display: inline;
-  }
-
-  .label-default {
-    font-weight: 100;
-    letter-spacing: 1px;
-  }
-
-  .navbar {
-    margin-bottom: 0px;
-  }
-
-  .progress-bar-striped {
-    // background-color: #b0c4de; // blue background
-    // background-color: #648f00; // Spotify green
-  }
-
-</style>

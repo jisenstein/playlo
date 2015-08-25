@@ -3,19 +3,27 @@
   <head>
     <title>Playlo</title>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#"><p>Playlo</p></a>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar navbar-collapse">
+          <p class="navbar-nav">
+          Playlo
+          </p>
         </div>
       </div>
     </nav>
 
     <%= yield %>
 
+    <br>
+    <footer>
+      <p>
+      © 2015 Josh Isenstein.
+      </p>
+    </footer>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   </body>
 </html>

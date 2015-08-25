@@ -9,15 +9,19 @@ class PlaylistsController < ApplicationController
 
     # Queue job to create playlist
     PlaylistCreator.new.delay.create_playlist(type, playlist_name, friends, spotify_credentials, playlist)
-    # flash[:notice] = "Creating playlist: '#{params[:name]}'."
     respond_to do |format|
       format.json {render :json => {status: 200, playlist_id: playlist.id}}
     end
-    # redirect_to root_path
+  rescue
+    Rails.cache.clear
+    reset_session
+    flash[:notice] = "Error: had to reset session. Please sign in and try again"
+    respond_to do |format|
+      format.json {render :json => {status: 400}}
+    end
   end
 
   def update
-    # debugger
     p = Playlist.find(params[:id])
     parsed = p.artists_parsed
     total = p.total_artists
@@ -26,9 +30,7 @@ class PlaylistsController < ApplicationController
     if parsed >= total || parsed < 0
       h[:status] = 200
       h[:alert] = %Q{
-        <h3 class='alert alert-info' role='alert'>
-          Successfully created your playlist: \"#{p.name}\", with #{p.total_artists} tracks. Now go check Spotify!
-        </h3>
+        Successfully created your playlist: <strong>#{p.name}</strong>, with #{p.total_artists} tracks. Now go check Spotify!
       }
       p.destroy
     else
