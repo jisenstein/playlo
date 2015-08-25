@@ -53,7 +53,6 @@ function getProgress(playlist_id) {
       url: '/playlists/' + playlist_id,
       method: 'PUT',
       complete: function(response) {
-        console.log("got response");
         var json = response.responseJSON;
         if (json.status == 400) {
           console.log("increasing width to " + json.percent);
