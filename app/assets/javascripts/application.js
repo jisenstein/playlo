@@ -38,7 +38,6 @@ $('form.create_playlist').submit(function(e){
         getProgress(json.playlist_id);
       } else {
         location.reload();
-        showAlert(json.alert);
       }
     }
   });
