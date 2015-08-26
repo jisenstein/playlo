@@ -2,4 +2,4 @@
 
 Playlo creates a Spotify playlist with one song from each artist you follow on Twitter.
 
-Try it out at playlo.herokuapp.com
+Try it out at [playlo.herokuapp.com](playlo.herokuapp.com)
