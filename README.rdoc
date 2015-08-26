@@ -1,3 +1,5 @@
 == PLAYLO
 
-Create a Spotify playlist with one song from each artist you follow on Twitter.
+Playlo creates a Spotify playlist with one song from each artist you follow on Twitter.
+
+Try it out at playlo.herokuapp.com
