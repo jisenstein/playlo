@@ -8,6 +8,8 @@ class PlaylistsController < ApplicationController
     playlist = Playlist.create(total_artists: friends.count, name: playlist_name)
 
     # Queue job to create playlist
+    puts "creating playlist"
+    # PlaylistCreator.new.create_playlist(type, playlist_name, friends, spotify_credentials, playlist)
     PlaylistCreator.new.delay.create_playlist(type, playlist_name, friends, spotify_credentials, playlist)
     respond_to do |format|
       format.json {render :json => {status: 200, playlist_id: playlist.id}}
